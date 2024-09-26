@@ -13,22 +13,23 @@
 
 
 ## PART 2 : Coding Technique Exploration
-- A useful coding technique for implementing the __grid-based generative art__ is the use of nested __“loops”__ in p5.js. By looping through __“x”__ and __“y”__ coordinates, I can create grid structures, and within each grid cell, apply random properties like __color, size, or shape__ using functions such as __“random()”__. This method allows for the controlled generation of __dynamic visuals__, ensuring a balance between structured design and randomness. It contributes to the desired effect by automating variation across the grid, creating unique, evolving patterns while maintaining visual coherence through consistent grid alignment. This technique simplifies complexity and offers flexibility.
+- __Technological Analysis__
+  
+  A useful coding technique for implementing the __grid-based generative art__ is the use of nested __“loops”__ in p5.js. By looping through __“x”__ and __“y”__ coordinates, I can create grid structures, and within each grid cell, apply random properties like __color, size, or shape__ using functions such as __“random()”__. This method allows for the controlled generation of __dynamic visuals__, ensuring a balance between structured design and randomness. It contributes to the desired effect by automating variation across the grid, creating unique, evolving patterns while maintaining visual coherence through consistent grid alignment. This technique simplifies complexity and offers flexibility.
 
-- __1. Technical example 01__
-  - 1.1
-![Technical example](readmeImages/03.gif)
-[Original link to this artwork](https://docs.kogics.net/tutorials/generative-art-grid-intro.html)
-  - 1.2 Coding
-   ![Coding example](readmeImages/05.png)
+- __Technical example 01__
+
+    ![Technical example](readmeImages/03.gif)  <br>
+    [Original link to this artwork](https://docs.kogics.net/tutorials/generative-art-grid-intro.html)  <br>
+    __Coding example__  <br>
+    ![Coding example](readmeImages/05.png)
 
 
 
-- __2. Technical example 02__
+- __Technical example 02__
 
-  - 2.1
-![Technical example](readmeImages/04.png)
-[Original link to this artwork](https://blog.djnavarro.net/posts/2023-03-31_generative-art-with-grid/)
-  - 2.2 Coding
-   ![Coding example](readmeImages/06.png)
+    ![Technical example](readmeImages/04.png)  <br>
+    [Original link to this artwork](https://blog.djnavarro.net/posts/2023-03-31_generative-art-with-grid/)  <br>
+    __Coding example__  <br>
+    ![Coding example](readmeImages/06.png)
 
