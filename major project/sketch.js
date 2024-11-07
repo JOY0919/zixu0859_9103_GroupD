@@ -1,7 +1,8 @@
 let blocks = []; // Array to store block properties
 let draggingBlock = null; // Track block being dragged
 let offsetX, offsetY; // Offset for dragging
-
+let shadowBlocks = []; // Store shadow positions for dragging animation
+let shadowTrailLength = 10; // Length of shadow trail
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -13,6 +14,7 @@ function draw() {
   background(255);
   drawStaticElements();
   drawInteractiveRects(); // Draw and manage interactivity for random rectangles
+  drawShadows(); // Draw shadows with animation
 }
 
 
@@ -61,6 +63,15 @@ function drawInteractiveRects() {
       block.size = block.originalSize; // Revert to original size
     }
 
+
+    // Draw the block
+    fill(block.color);
+    noStroke();
+    rect(block.x, block.y, block.size, block.size);
+  }
+}
+
+
  // Draw shadow effect when dragging
  if (draggingBlock === block) {
   for (let i = 15; i > 0; i--) {
@@ -72,12 +83,23 @@ function drawInteractiveRects() {
 }
 
 
-    // Draw the block
-    fill(block.color);
+
+// Function to draw shadow animation
+function drawShadows() {
+  for (let shadow of shadowBlocks) {
+    fill(shadow.color[0], shadow.color[1], shadow.color[2], shadow.alpha);
     noStroke();
-    rect(block.x, block.y, block.size, block.size);
+    rect(shadow.x, shadow.y, shadow.size, shadow.size);
+
+    // Update shadow position to create trailing effect
+    shadow.x += shadow.vx;
+    shadow.y += shadow.vy;
+    shadow.alpha -= 5;
   }
+  // Remove shadows that have faded out
+  shadowBlocks = shadowBlocks.filter(shadow => shadow.alpha > 0);
 }
+
 
 // Change color on click
 function mousePressed() {
@@ -103,11 +125,24 @@ function mouseReleased() {
 // Drag and move block
 function mouseDragged() {
   if (draggingBlock) {
-    draggingBlock.x = mouseX - offsetX;
-    draggingBlock.y = mouseY - offsetY;
-  }
+// Store shadow positions for animation
+for (let i = 0; i < shadowTrailLength; i++) {
+  shadowBlocks.push({
+    x: draggingBlock.x - i * offsetX * 0.05,
+    y: draggingBlock.y - i * offsetY * 0.05,
+    size: draggingBlock.size,
+    color: draggingBlock.color,
+    alpha: 150 - (i * 15),
+    vx: (mouseX - offsetX - draggingBlock.x) * 0.05,
+    vy: (mouseY - offsetY - draggingBlock.y) * 0.05
+  });
 }
 
+// Update block position
+draggingBlock.x = mouseX - offsetX;
+draggingBlock.y = mouseY - offsetY;
+}
+}
 
 // Reset position on double-click
 function doubleClicked() {
