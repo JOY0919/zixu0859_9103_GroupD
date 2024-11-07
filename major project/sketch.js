@@ -3,9 +3,11 @@ let draggingBlock = null; // Track block being dragged
 let offsetX, offsetY; // Offset for dragging
 let shadowBlocks = []; // Store shadow positions for dragging animation
 let shadowTrailLength = 10; // Length of shadow trail
+let randomLines = []; // Store random line positions to prevent auto-update
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  generateRandomLines();
   drawStaticElements();
   generateRandomRects();
 }
@@ -29,6 +31,49 @@ function drawStaticElements() {
   drawColouredVerticalRoad(min(width, height) / 40 * 13);
   drawColouredHorizontalRoad(min(width, height) / 40 * 37);
 }
+
+
+// Function to generate random line positions once
+function generateRandomLines() {
+  let size = min(windowWidth, windowHeight);
+
+  // Generate y positions for horizontal lines
+  let yPositions = [0, size];
+  for (let i = 0; i < 5; i++) {
+    yPositions.push(random(50, size - 50));
+  }
+  yPositions.sort((a, b) => a - b);
+  randomLines.push({ type: 'horizontal', positions: yPositions });
+
+  // Generate x positions for vertical lines
+  let xPositions = [0, size];
+  for (let j = 0; j < 5; j++) {
+    xPositions.push(random(50, size - 30));
+  }
+  xPositions.sort((a, b) => a - b);
+  randomLines.push({ type: 'vertical', positions: xPositions });
+}
+
+// Function to draw the random lines from stored positions
+function drawRandomLines() {
+  let size = min(windowWidth, windowHeight);
+  stroke(252, 224, 46);
+  strokeWeight(size / 40);
+
+  // Draw horizontal lines
+  let horizontalLines = randomLines.find(line => line.type === 'horizontal');
+  for (let y of horizontalLines.positions) {
+    line(0, y, size, y);
+  }
+
+  // Draw vertical lines
+  let verticalLines = randomLines.find(line => line.type === 'vertical');
+  for (let x of verticalLines.positions) {
+    line(x, 0, x, size);
+  }
+}
+
+
 
 // Function to generate random rectangles and store them in blocks array
 function generateRandomRects() {
@@ -58,7 +103,7 @@ function drawInteractiveRects() {
 
 // Apply hover effect
     if (isHovered) {
-      block.size = block.originalSize * 5; // Enlarge size by 20% on hover
+      block.size = block.originalSize * 3; 
     } else {
       block.size = block.originalSize; // Revert to original size
     }
@@ -72,22 +117,15 @@ function drawInteractiveRects() {
 }
 
 
- // Draw shadow effect when dragging
- if (draggingBlock === block) {
-  for (let i = 15; i > 0; i--) {
-    let alpha = map(i, 5, 1, 50, 200);
-    fill(block.color[0], block.color[1], block.color[2], alpha);
-    noStroke();
-    rect(block.x - offsetX * 0.5 * i, block.y - offsetY * 0.5 * i, block.size, block.size);
-  }
-}
-
 
 
 // Function to draw shadow animation
 function drawShadows() {
   for (let shadow of shadowBlocks) {
-    fill(shadow.color[0], shadow.color[1], shadow.color[2], shadow.alpha);
+    let startColor = color(shadow.color);
+    let endColor = color(255, 255, 255, 0); // Fade to transparent white
+    let gradientColor = lerpColor(startColor, endColor, shadow.lerpFactor);
+    fill(gradientColor);
     noStroke();
     rect(shadow.x, shadow.y, shadow.size, shadow.size);
 
@@ -95,6 +133,7 @@ function drawShadows() {
     shadow.x += shadow.vx;
     shadow.y += shadow.vy;
     shadow.alpha -= 5;
+    shadow.lerpFactor += 0.1;
   }
   // Remove shadows that have faded out
   shadowBlocks = shadowBlocks.filter(shadow => shadow.alpha > 0);
@@ -158,39 +197,6 @@ function doubleClicked() {
 }
 
 
-
-function drawRandomLines(){
-  let size = min(windowWidth, windowHeight);
-  // Set the stroke color and weight for the yellow lines
-  stroke(252, 224, 46);
-  strokeWeight(size / 40);
-  
-
-  // Define the number of lines for both horizontal and vertical
-  let yPositions = [0, size];
-  for (let i = 0; i < 5; i++){
-    yPositions.push(random(50, size - 50));
-  }
-  yPositions.sort((a,b) => a-b);
-
-  // Draw the horizontal lines
-  for (let y of yPositions ){
-    line(0, y, size, y);
-  }
-
-  let xPositions = [0, size];
-  for (let j = 0; j < 5; j++){
-    xPositions.push(random(50, size - 30));
-  }
-  xPositions.sort((a,b) => a-b);
-
-
-    // Draw the vertical lines
-  for (let x of xPositions ){
-      line(x, 0, x, size);
-  }
-
-}
 
 
 
