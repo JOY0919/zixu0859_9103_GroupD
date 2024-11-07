@@ -117,13 +117,11 @@ function drawInteractiveRects() {
 }
 
 
-
-
 // Function to draw shadow animation
 function drawShadows() {
   for (let shadow of shadowBlocks) {
     let startColor = color(shadow.color);
-    let endColor = color(255, 255, 255, 0); // Fade to transparent white
+    let endColor = color(255, 255, 255, 255);
     let gradientColor = lerpColor(startColor, endColor, shadow.lerpFactor);
     
     fill(gradientColor);
@@ -165,23 +163,26 @@ function mouseReleased() {
 // Drag and move block
 function mouseDragged() {
   if (draggingBlock) {
-// Store shadow positions for animation
-for (let i = 0; i < shadowTrailLength; i++) {
-  shadowBlocks.push({
-    x: draggingBlock.x - i * offsetX * 0.05,
-    y: draggingBlock.y - i * offsetY * 0.05,
-    size: draggingBlock.size,
-    color: draggingBlock.color,
-    alpha: 150 - (i * 15),
-    vx: (mouseX - offsetX - draggingBlock.x) * 0.05,
-    vy: (mouseY - offsetY - draggingBlock.y) * 0.05
-  });
-}
+// Change color while dragging
+    draggingBlock.color = [Math.floor(random(255)), Math.floor(random(255)), Math.floor(random(255))]; // Assign a new random RGB color
 
-// Update block position
-draggingBlock.x = mouseX - offsetX;
-draggingBlock.y = mouseY - offsetY;
-}
+// Store shadow positions for animation
+    for (let i = 0; i < shadowTrailLength; i++) {
+      shadowBlocks.push({
+        x: draggingBlock.x - i * offsetX * 0.05,
+        y: draggingBlock.y - i * offsetY * 0.05,
+        size: draggingBlock.size,
+        color: [...draggingBlock.color],
+        alpha: 150 - (i * 15),
+        vx: (mouseX - offsetX - draggingBlock.x) * 0.05,
+        vy: (mouseY - offsetY - draggingBlock.y) * 0.05
+      });
+    }
+
+    // Update block position
+    draggingBlock.x = mouseX - offsetX;
+    draggingBlock.y = mouseY - offsetY;
+  }
 }
 
 // Reset position on double-click
