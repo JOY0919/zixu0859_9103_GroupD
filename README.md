@@ -1,4 +1,4 @@
-# Quiz 8
+# zixu0859_9103_GroupD
 ## PART 1 : Imaging Technique Inspiration
 ### Inspiration sources
 - _I chose the “Infinite Command Team” by Casey Reas as my inspiration._
