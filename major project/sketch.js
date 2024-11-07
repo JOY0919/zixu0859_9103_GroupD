@@ -1,15 +1,25 @@
-//Ziyue Xu
-//Original yellow line background
+let blocks = []; // Array to store block properties
+let draggingBlock = null; // Track block being dragged
+let offsetX, offsetY; // Offset for dragging
+
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  drawStaticElements();
+  generateRandomRects();
 }
     
 function draw() {
   background(255);
-  noLoop()
-  drawRandomLines()
+  drawStaticElements();
+  drawInteractiveRects(); // Draw and manage interactivity for random rectangles
+}
+
+
+// Function to draw static elements (existing lines, fixed rects, roads)
+function drawStaticElements() {
+  drawRandomLines();
   drawfixedRects();
-  randomRect();
   drawColouredHorizontalRoad(min(width, height) / 40 * 21);
   drawColouredVerticalRoad(min(width, height) / 40 * 1);
   drawColouredVerticalRoad(min(width, height) / 40 * 23);
@@ -18,20 +28,58 @@ function draw() {
   drawColouredHorizontalRoad(min(width, height) / 40 * 37);
 }
 
-// Mouse interaction function to add random transformations on click
-function mousePressed() {
-  clear();
-  background(255);
+// Function to generate random rectangles and store them in blocks array
+function generateRandomRects() {
+  let size = min(windowWidth, windowHeight);
+  let colors = [
+    [239, 17, 17],    // red
+    [43, 115, 247],   // blue
+    [211, 211, 211]   // gray
+  ];
 
-  // Randomly reposition lines and rectangles and change colors
-  drawRandomLines();
-  drawfixedRects();
-  randomRect();
-  drawColouredHorizontalRoad(min(width, height) / 40 * int(random(20, 40)));
-  drawColouredVerticalRoad(min(width, height) / 40 * int(random(1, 40)));
-  
-  redraw(); // Redraw with updated transformations
+  for (let i = 0; i < 20; i++) {
+    let rectSize = random(20, 80);
+    let x = random(0, size - rectSize);
+    let y = random(0, size - rectSize);
+    let color = random(colors);
+    blocks.push({ x, y, size: rectSize, originalSize: rectSize, color, originalX: x, originalY: y });
+  }
 }
+
+// Function to draw and apply interactions on random rectangles
+function drawInteractiveRects() {
+  for (let block of blocks) {
+    let isHovered = mouseX > block.x && mouseX < block.x + block.size &&
+                    mouseY > block.y && mouseY < block.y + block.size;
+
+
+
+// Apply hover effect
+    if (isHovered) {
+      block.size = block.originalSize * 5; // Enlarge size by 20% on hover
+    } else {
+      block.size = block.originalSize; // Revert to original size
+    }
+
+    // Draw the block
+    fill(block.color);
+    noStroke();
+    rect(block.x, block.y, block.size, block.size);
+  }
+}
+
+
+
+
+
+// Function for handling mouse interactions
+function mousePressed() {
+  // Redraw random rectangles with different colors upon mouse click
+  randomRect();
+  redraw();
+}
+
+
 
 function drawRandomLines(){
   let size = min(windowWidth, windowHeight);
@@ -65,6 +113,7 @@ function drawRandomLines(){
   }
 
 }
+
 
 
 
@@ -149,8 +198,7 @@ function randomRect(){
   }
 }
 
-// Xueying Wang
-// The function of drawing fixed yellow lines with three-color squares on it
+
 function drawColouredHorizontalRoad(y){
   let boxSize = min(width, height) / 40;
   let boxNumbers = min(width, height) / boxSize;
