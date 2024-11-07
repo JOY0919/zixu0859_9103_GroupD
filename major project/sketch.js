@@ -18,6 +18,21 @@ function draw() {
   drawColouredHorizontalRoad(min(width, height) / 40 * 37);
 }
 
+// Mouse interaction function to add random transformations on click
+function mousePressed() {
+  clear();
+  background(255);
+
+  // Randomly reposition lines and rectangles and change colors
+  drawRandomLines();
+  drawfixedRects();
+  randomRect();
+  drawColouredHorizontalRoad(min(width, height) / 40 * int(random(20, 40)));
+  drawColouredVerticalRoad(min(width, height) / 40 * int(random(1, 40)));
+  
+  redraw(); // Redraw with updated transformations
+}
+
 function drawRandomLines(){
   let size = min(windowWidth, windowHeight);
   // Set the stroke color and weight for the yellow lines
@@ -52,10 +67,6 @@ function drawRandomLines(){
 }
 
 
-
-//Zichen Zhang
-//Generate red, blue and gray squares that appear in different positions each time they refresh
-//Some fixed squares, representing objects（such as some buildings) that don't change
 
 function drawfixedRects(){
   let size = min(windowWidth, windowHeight)
