@@ -37,7 +37,7 @@ function generateRandomRects() {
     [211, 211, 211]   // gray
   ];
 
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 50 ; i++) {
     let rectSize = random(20, 80);
     let x = random(0, size - rectSize);
     let y = random(0, size - rectSize);
@@ -56,7 +56,7 @@ function drawInteractiveRects() {
 
 // Apply hover effect
     if (isHovered) {
-      block.size = block.originalSize * 5; // Enlarge size by 20% on hover
+      block.size = block.originalSize * 10; // Enlarge size by 20% on hover
     } else {
       block.size = block.originalSize; // Revert to original size
     }
@@ -67,8 +67,6 @@ function drawInteractiveRects() {
     rect(block.x, block.y, block.size, block.size);
   }
 }
-
-
 
 // Change color on click
 function mousePressed() {
@@ -85,6 +83,7 @@ function mousePressed() {
   }
 }
 
+
 // Stop dragging on mouse release
 function mouseReleased() {
   draggingBlock = null;
@@ -98,6 +97,7 @@ function mouseDragged() {
   }
 }
 
+
 // Reset position on double-click
 function doubleClicked() {
   for (let block of blocks) {
@@ -110,7 +110,6 @@ function doubleClicked() {
     }
   }
 }
-
 
 
 
