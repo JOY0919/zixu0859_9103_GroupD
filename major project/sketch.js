@@ -37,7 +37,7 @@ function generateRandomRects() {
     [211, 211, 211]   // gray
   ];
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 50; i++) {
     let rectSize = random(20, 80);
     let x = random(0, size - rectSize);
     let y = random(0, size - rectSize);
@@ -70,14 +70,47 @@ function drawInteractiveRects() {
 
 
 
-
-
-// Function for handling mouse interactions
+// Change color on click
 function mousePressed() {
-  // Redraw random rectangles with different colors upon mouse click
-  randomRect();
-  redraw();
+  for (let block of blocks) {
+    let isHovered = mouseX > block.x && mouseX < block.x + block.size &&
+                    mouseY > block.y && mouseY < block.y + block.size;
+    if (isHovered) {
+      block.color = [random(255), random(255), random(255)]; // Assign random color
+      draggingBlock = block; // Start dragging if clicked
+      offsetX = mouseX - block.x;
+      offsetY = mouseY - block.y;
+      break;
+    }
+  }
 }
+
+// Stop dragging on mouse release
+function mouseReleased() {
+  draggingBlock = null;
+}
+
+// Drag and move block
+function mouseDragged() {
+  if (draggingBlock) {
+    draggingBlock.x = mouseX - offsetX;
+    draggingBlock.y = mouseY - offsetY;
+  }
+}
+
+// Reset position on double-click
+function doubleClicked() {
+  for (let block of blocks) {
+    let isHovered = mouseX > block.x && mouseX < block.x + block.size &&
+                    mouseY > block.y && mouseY < block.y + block.size;
+    if (isHovered) {
+      block.x = block.originalX;
+      block.y = block.originalY;
+      break;
+    }
+  }
+}
+
 
 
 
