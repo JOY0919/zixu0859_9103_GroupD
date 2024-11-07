@@ -125,6 +125,7 @@ function drawShadows() {
     let startColor = color(shadow.color);
     let endColor = color(255, 255, 255, 0); // Fade to transparent white
     let gradientColor = lerpColor(startColor, endColor, shadow.lerpFactor);
+    
     fill(gradientColor);
     noStroke();
     rect(shadow.x, shadow.y, shadow.size, shadow.size);
