@@ -56,10 +56,21 @@ function drawInteractiveRects() {
 
 // Apply hover effect
     if (isHovered) {
-      block.size = block.originalSize * 10; // Enlarge size by 20% on hover
+      block.size = block.originalSize * 5; // Enlarge size by 20% on hover
     } else {
       block.size = block.originalSize; // Revert to original size
     }
+
+ // Draw shadow effect when dragging
+ if (draggingBlock === block) {
+  for (let i = 15; i > 0; i--) {
+    let alpha = map(i, 5, 1, 50, 200);
+    fill(block.color[0], block.color[1], block.color[2], alpha);
+    noStroke();
+    rect(block.x - offsetX * 0.5 * i, block.y - offsetY * 0.5 * i, block.size, block.size);
+  }
+}
+
 
     // Draw the block
     fill(block.color);
