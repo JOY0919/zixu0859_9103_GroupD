@@ -335,4 +335,9 @@ function drawColouredVerticalRoad(x){
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+  blocks = []; // Clear existing blocks
+  shadowBlocks = []; // Clear shadow positions
+  randomLines = []; // Clear random lines
+  generateRandomLines(); // Regenerate random lines
+  generateRandomRects(); // Regenerate random rectangles
 }
