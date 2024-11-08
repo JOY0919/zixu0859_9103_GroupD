@@ -39,11 +39,11 @@ _The animation properties I’ve chosen focus on **size**, **color**, and **shad
 - **Geometric Structure and Depth**
 ![High-quality screenshots](readmeImages/03.gif)
 
-Inspired by the first image with its dense grid of geometric shapes and 3D-like depth, your code creates a sense of depth by allowing blocks to change size on hover, giving the impression of closeness or distance. This effect is amplified by implementing a gradient of opacity or size, where blocks further down or towards the edges appear smaller or fainter. This adds a visually engaging depth and flow to the composition, making it appear dynamic and layered.
+Inspired by the first image with its dense grid of geometric shapes and 3D-like depth, this code creates a sense of depth by allowing blocks to change size on hover, giving the impression of closeness or distance. This effect is amplified by implementing a gradient of opacity or size, where blocks further down or towards the edges appear smaller or fainter. This adds a visually engaging depth and flow to the composition, making it appear dynamic and layered.
 - **Mondrian-style Color Palette and Composition**
 ![High-quality screenshots](readmeImages/8.png)
 
-The Mondrian-inspired primary color scheme (red, yellow, blue, black, and white) brings bold and clean visual appeal to the interactive blocks. Your code can assign these colors to blocks upon generation or interaction, keeping the layout vibrant and harmonious. The thick black borders around shapes in Mondrian's work are mimicked in your design through clear block boundaries, enhancing the structured, balanced look.
+The Mondrian-inspired primary color scheme (red, yellow, blue, black, and white) brings bold and clean visual appeal to the interactive blocks. This code can assign these colors to blocks upon generation or interaction, keeping the layout vibrant and harmonious. The thick black borders around shapes in Mondrian's work are mimicked in your design through clear block boundaries, enhancing the structured, balanced look.
 
 This color palette is maintained as blocks change colors through interactions (click, drag), ensuring each color transformation adheres to the limited primary palette, keeping the composition unified and striking.
 Minimalistic Block-based Layout with Accent Elements:
@@ -51,7 +51,7 @@ Minimalistic Block-based Layout with Accent Elements:
 - **Minimalistic Block-based Layout with Accent Elements:**
 ![High-quality screenshots](readmeImages/7.png)
 
-The third image, with its minimalist design using large blocks of yellow, blue, and gray with red accents, adds structure and modularity. Your code can reflect this by positioning larger blocks in an abstract pattern, with smaller red rectangles acting as accents or secondary elements.
+The third image, with its minimalist design using large blocks of yellow, blue, and gray with red accents, adds structure and modularity. This code can reflect this by positioning larger blocks in an abstract pattern, with smaller red rectangles acting as accents or secondary elements.
 
 These red accents can be used in interactive ways, such as changing position or flashing when nearby blocks are clicked or dragged, giving a lively and subtle response that adds visual interest without overwhelming the composition.
 
